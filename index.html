@@ -19,38 +19,33 @@
                             accent: '#FCD34D',
                             rose: '#F472B6'
                         }
-                    },
-                    fontFamily: {
-                        sans: ['Segoe UI', 'sans-serif'],
-                    },
+                    }
                 }
             }
         }
     </script>
     
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .bg-cosmic {
-                background: linear-gradient(180deg, #0F0C29 0%, #302B63 50%, #24243e 100%);
-            }
-            .glass {
-                background: rgba(255, 255, 255, 0.08);
-                backdrop-filter: blur(12px);
-                border: 1px solid rgba(255, 255, 255, 0.15);
-            }
-            .glow {
-                box-shadow: 0 0 25px rgba(99, 102, 241, 0.35);
-            }
-            .star {
-                position: absolute;
-                background: white;
-                border-radius: 50%;
-                animation: twinkle 3s infinite alternate;
-            }
-            @keyframes twinkle {
-                0% { opacity: 0.3; transform: scale(0.8); }
-                100% { opacity: 1; transform: scale(1.2); }
-            }
+    <style>
+        .bg-cosmic {
+            background: linear-gradient(180deg, #0F0C29 0%, #302B63 50%, #24243e 100%);
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .glow {
+            box-shadow: 0 0 25px rgba(99, 102, 241, 0.35);
+        }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
         }
     </style>
 </head>
@@ -60,10 +55,10 @@
 
     <!-- Header -->
     <header class="relative z-10 py-8 px-4 text-center">
-        <h1 class="text-[clamp(1.8rem,5vw,2.8rem)] font-bold bg-gradient-to-r from-cosmic-accent via-white to-cosmic-rose bg-clip-text text-transparent">
+        <h1 class="text-3xl font-bold bg-gradient-to-r from-yellow-300 via-white to-pink-300 bg-clip-text text-transparent">
             🔮 Ragam Bintang & Waktu
         </h1>
-        <p class="text-white/70 mt-2 max-w-lg mx-auto">Menemukan keselarasan bintang dan waktu terbaik untuk langkahmu</p>
+        <p class="text-white/70 mt-2 max-w-lg mx-auto">Menemukan keselarasan bintang dan waktu terbaik</p>
     </header>
 
     <!-- Navigasi -->
@@ -71,22 +66,22 @@
         <button id="tab-zodiak" class="px-6 py-3 rounded-full font-medium glass glow text-white">
             ♈ Kecocokan Zodiak
         </button>
-        <button id="tab-hari" class="px-6 py-3 rounded-full font-medium text-white/70 hover:text-white glass/50">
+        <button id="tab-hari" class="px-6 py-3 rounded-full font-medium text-white/70 glass/50">
             📅 Hari Baik
         </button>
     </div>
 
     <!-- Konten Utama -->
     <main class="relative z-10 container mx-auto px-4 pb-16">
-        <!-- Kalkulator Kecocokan Zodiak -->
-        <section id="form-zodiak" class="glass rounded-3xl p-6 md:p-10 max-w-xl mx-auto glow">
+        <!-- KALKULATOR ZODIAK -->
+        <section id="form-zodiak" class="glass rounded-3xl p-6 max-w-xl mx-auto glow">
             <h2 class="text-2xl font-bold text-center mb-6">Analisis Kecocokan Pasangan</h2>
             
             <div class="space-y-5 mb-8">
                 <div>
                     <label class="block text-white/80 mb-2 font-medium">Data Diri Anda</label>
                     <div class="grid grid-cols-2 gap-3">
-                        <select id="z1" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 outline-none focus:ring-2 focus:ring-cosmic-light">
+                        <select id="z1" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20">
                             <option value="">Pilih Zodiak</option>
                             <option value="aries">Aries</option>
                             <option value="taurus">Taurus</option>
@@ -101,8 +96,7 @@
                             <option value="aquarius">Aquarius</option>
                             <option value="pisces">Pisces</option>
                         </select>
-                        <!-- Ganti kotak pilihan elemen dengan teks biasa agar terlihat jelas -->
-                        <div id="tampil-elemen1" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 flex items-center text-white/60">
+                        <div id="elem1" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white/60">
                             Elemen
                         </div>
                     </div>
@@ -111,7 +105,7 @@
                 <div>
                     <label class="block text-white/80 mb-2 font-medium">Data Pasangan</label>
                     <div class="grid grid-cols-2 gap-3">
-                        <select id="z2" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 outline-none focus:ring-2 focus:ring-cosmic-light">
+                        <select id="z2" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20">
                             <option value="">Pilih Zodiak</option>
                             <option value="aries">Aries</option>
                             <option value="taurus">Taurus</option>
@@ -126,244 +120,211 @@
                             <option value="aquarius">Aquarius</option>
                             <option value="pisces">Pisces</option>
                         </select>
-                        <div id="tampil-elemen2" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 flex items-center text-white/60">
+                        <div id="elem2" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white/60">
                             Elemen
                         </div>
                     </div>
                 </div>
             </div>
 
-            <button id="btn-hitung" onclick="hitungKecocokan()" class="w-full py-4 rounded-xl bg-gradient-to-r from-cosmic-light to-cosmic-rose font-semibold text-lg shadow-lg hover:opacity-90 transition">
+            <button id="btnCek" class="w-full py-4 rounded-xl bg-gradient-to-r from-indigo-500 to-pink-400 font-semibold text-lg shadow-lg">
                 Lihat Keselarasan <i class="fa fa-magic ml-2"></i>
             </button>
 
-            <!-- Hasil -->
-            <div id="hasil-zodiak" class="mt-8 hidden">
+            <!-- HASIL -->
+            <div id="hasil" class="mt-8 hidden">
                 <div class="p-6 rounded-2xl bg-white/5 border border-white/15">
                     <div class="text-center mb-4">
-                        <div class="text-5xl font-bold text-cosmic-accent mb-2"><span id="nilai-akhir">0</span>%</div>
-                        <h3 id="status-hubungan" class="text-xl font-semibold"></h3>
+                        <div class="text-5xl font-bold text-yellow-300 mb-2"><span id="nilai">0</span>%</div>
+                        <h3 id="status" class="text-xl font-semibold"></h3>
                     </div>
-
-                    <div class="space-y-4 mt-6">
-                        <div class="p-3 bg-white/5 rounded-lg">
-                            <p class="text-sm text-white/60">Keserasian Emosi</p>
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium" id="emosi-nilai"></span>
-                                <div class="w-2/3 bg-white/10 rounded-full h-2"><div id="emosi-bar" class="h-full rounded-full bg-pink-400"></div></div>
-                            </div>
-                        </div>
-                        <div class="p-3 bg-white/5 rounded-lg">
-                            <p class="text-sm text-white/60">Komunikasi & Pikiran</p>
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium" id="komunikasi-nilai"></span>
-                                <div class="w-2/3 bg-white/10 rounded-full h-2"><div id="komunikasi-bar" class="h-full rounded-full bg-blue-400"></div></div>
-                            </div>
-                        </div>
-                        <div class="p-3 bg-white/5 rounded-lg">
-                            <p class="text-sm text-white/60">Keintiman & Gairah</p>
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium" id="gairah-nilai"></span>
-                                <div class="w-2/3 bg-white/10 rounded-full h-2"><div id="gairah-bar" class="h-full rounded-full bg-red-400"></div></div>
-                            </div>
-                        </div>
-                        <div class="p-3 bg-white/5 rounded-lg">
-                            <p class="text-sm text-white/60">Kestabilan Jangka Panjang</p>
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium" id="stabil-nilai"></span>
-                                <div class="w-2/3 bg-white/10 rounded-full h-2"><div id="stabil-bar" class="h-full rounded-full bg-amber-400"></div></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-5 pt-4 border-t border-white/10">
-                        <p class="text-white/80" id="uraian-lengkap"></p>
-                        <p class="text-sm text-white/50 mt-3 italic">*Bersifat sebagai panduan penambah keyakinan diri</p>
-                    </div>
+                    <p id="uraian" class="text-white/80 mt-4"></p>
                 </div>
             </div>
         </section>
 
-        <!-- Kalkulator Hari Baik -->
-        <section id="form-hari" class="glass rounded-3xl p-6 md:p-10 max-w-xl mx-auto glow hidden">
+        <!-- KALKULATOR HARI BAIK -->
+        <section id="form-hari" class="glass rounded-3xl p-6 max-w-xl mx-auto glow hidden">
             <h2 class="text-2xl font-bold text-center mb-6">Pencarian Waktu Terbaik</h2>
             
             <div class="space-y-5 mb-8">
                 <div>
                     <label class="block text-white/80 mb-2 font-medium">Tanggal Lahir Anda</label>
-                    <input type="date" id="tgl-lahir" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 outline-none focus:ring-2 focus:ring-cosmic-light">
+                    <input type="date" id="tglLahir" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20">
                 </div>
-
                 <div>
                     <label class="block text-white/80 mb-2 font-medium">Jenis Kegiatan</label>
-                    <select id="jenis" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 outline-none focus:ring-2 focus:ring-cosmic-light">
+                    <select id="jenis" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20">
                         <option value="">-- Pilih Kegiatan --</option>
-                        <option value="usaha">Memulai Usaha / Bisnis</option>
-                        <option value="kerja">Mulai Pekerjaan / Kontrak Baru</option>
+                        <option value="usaha">Memulai Usaha</option>
+                        <option value="kerja">Mulai Pekerjaan</option>
                         <option value="perjalanan">Perjalanan Jauh</option>
-                        <option value="bangun">Membangun / Merenovasi Rumah</option>
-                        <option value="nikah">Menikah / Bertunangan</option>
-                        <option value="belanja">Membeli Barang Berharga</option>
+                        <option value="bangun">Membangun Rumah</option>
+                        <option value="nikah">Menikah/Bertunangan</option>
                     </select>
                 </div>
-
                 <div>
-                    <label class="block text-white/80 mb-2 font-medium">Bulan & Tahun Perencanaan</label>
-                    <input type="month" id="bulan-rencana" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 outline-none focus:ring-2 focus:ring-cosmic-light">
+                    <label class="block text-white/80 mb-2 font-medium">Bulan & Tahun</label>
+                    <input type="month" id="bulanRencana" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20">
                 </div>
             </div>
 
-            <button onclick="cariHariBaik()" class="w-full py-4 rounded-xl bg-gradient-to-r from-cosmic-light to-cosmic-accent font-semibold text-lg shadow-lg hover:opacity-90 transition">
+            <button id="btnHari" class="w-full py-4 rounded-xl bg-gradient-to-r from-indigo-500 to-yellow-400 font-semibold text-lg">
                 Temukan Hari Baik <i class="fa fa-calendar-check-o ml-2"></i>
             </button>
 
-            <!-- Hasil -->
-            <div id="hasil-hari" class="mt-8 hidden">
+            <div id="hasilHari" class="mt-8 hidden">
                 <div class="p-6 rounded-2xl bg-white/5 border border-white/15">
-                    <h3 class="text-xl font-semibold mb-4 text-center">✨ Waktu yang Disarankan</h3>
-                    <ul id="daftar-hari" class="space-y-3">
-                    </ul>
-                    <p class="text-sm text-white/50 mt-5 italic">*Menggabungkan prinsip astrologi dan kearifan lokal. Sebagai panduan tambahan keyakinan.</p>
+                    <h3 class="text-xl font-semibold mb-4 text-center">✨ Waktu Disarankan</h3>
+                    <ul id="daftarHari" class="space-y-3"></ul>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="relative z-10 text-center py-6 text-white/50 text-sm border-t border-white/10">
-        <p>© 2026 Ragam FM Studio & News | Dibuat dengan sepenuh hati ✨</p>
+    <footer class="text-center py-6 text-white/50 text-sm border-t border-white/10">
+        <p>© 2026 Ragam FM Studio & News ✨</p>
     </footer>
 
     <script>
-        // Buat latar bintang berkelap-kelip
+        // Bintang latar
         const container = document.getElementById('stars-container');
-        for(let i=0; i<120; i++){
+        for(let i=0; i<100; i++){
             const bintang = document.createElement('div');
             bintang.classList.add('star');
             bintang.style.left = `${Math.random()*100}%`;
             bintang.style.top = `${Math.random()*100}%`;
-            bintang.style.width = bintang.style.height = `${Math.random()*2.5+1}px`;
-            bintang.style.animationDelay = `${Math.random()*3}s`;
+            bintang.style.width = bintang.style.height = `${Math.random()*2+1}px`;
+            bintang.style.animationDelay = `${Math.random()*2}s`;
             container.appendChild(bintang);
         }
 
-        // Data zodiak: elemen & sifat dasar
-        const dataZodiak = {
-            aries: {elemen: 'Api', sifat: 'Pemberani, Dinamis'},
-            taurus: {elemen: 'Tanah', sifat: 'Setia, Teguh'},
-            gemini: {elemen: 'Udara', sifat: 'Cerdas, Komunikatif'},
-            cancer: {elemen: 'Air', sifat: 'Penyayang, Peka'},
-            leo: {elemen: 'Api', sifat: 'Berjiwa besar, Percaya diri'},
-            virgo: {elemen: 'Tanah', sifat: 'Teliti, Suka menolong'},
-            libra: {elemen: 'Udara', sifat: 'Harmonis, Bijaksana'},
-            scorpio: {elemen: 'Air', sifat: 'Penuh gairah, Setia'},
-            sagitarius: {elemen: 'Api', sifat: 'Bebas, Optimis'},
-            capricorn: {elemen: 'Tanah', sifat: 'Tekun, Bertanggung jawab'},
-            aquarius: {elemen: 'Udara', sifat: 'Unik, Berpikiran maju'},
-            pisces: {elemen: 'Air', sifat: 'Empati, Kreatif'}
+        // Data zodiak
+        const data = {
+            aries: 'Api', taurus: 'Tanah', gemini: 'Udara', cancer: 'Air',
+            leo: 'Api', virgo: 'Tanah', libra: 'Udara', scorpio: 'Air',
+            sagitarius: 'Api', capricorn: 'Tanah', aquarius: 'Udara', pisces: 'Air'
         };
 
-        // Tampilkan elemen otomatis dengan teks (bukan kotak pilihan)
+        // Tampilkan elemen otomatis
         document.getElementById('z1').addEventListener('change', function(){
             const val = this.value;
-            const kotak = document.getElementById('tampil-elemen1');
-            if(val) {
-                kotak.textContent = dataZodiak[val].elemen;
-                kotak.classList.remove('text-white/60');
-                kotak.classList.add('text-white', 'font-medium');
-            } else {
-                kotak.textContent = 'Elemen';
-                kotak.classList.add('text-white/60');
-                kotak.classList.remove('text-white', 'font-medium');
-            }
+            const el = document.getElementById('elem1');
+            el.textContent = val ? data[val] : 'Elemen';
+            el.className = val ? 'w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-medium' : 'w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white/60';
         });
 
         document.getElementById('z2').addEventListener('change', function(){
             const val = this.value;
-            const kotak = document.getElementById('tampil-elemen2');
-            if(val) {
-                kotak.textContent = dataZodiak[val].elemen;
-                kotak.classList.remove('text-white/60');
-                kotak.classList.add('text-white', 'font-medium');
-            } else {
-                kotak.textContent = 'Elemen';
-                kotak.classList.add('text-white/60');
-                kotak.classList.remove('text-white', 'font-medium');
-            }
+            const el = document.getElementById('elem2');
+            el.textContent = val ? data[val] : 'Elemen';
+            el.className = val ? 'w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-medium' : 'w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white/60';
         });
 
-        // Ganti tab
+        // Ganti Menu
         document.getElementById('tab-zodiak').addEventListener('click', () => {
-            gantiMenu('zodiak');
+            document.getElementById('form-zodiak').classList.remove('hidden');
+            document.getElementById('form-hari').classList.add('hidden');
+            document.getElementById('tab-zodiak').className = 'px-6 py-3 rounded-full font-medium glass glow text-white';
+            document.getElementById('tab-hari').className = 'px-6 py-3 rounded-full font-medium text-white/70 glass/50';
         });
+
         document.getElementById('tab-hari').addEventListener('click', () => {
-            gantiMenu('hari');
+            document.getElementById('form-hari').classList.remove('hidden');
+            document.getElementById('form-zodiak').classList.add('hidden');
+            document.getElementById('tab-hari').className = 'px-6 py-3 rounded-full font-medium glass glow text-white';
+            document.getElementById('tab-zodiak').className = 'px-6 py-3 rounded-full font-medium text-white/70 glass/50';
         });
 
-        function gantiMenu(aktif){
-            document.getElementById('form-zodiak').classList.toggle('hidden', aktif !== 'zodiak');
-            document.getElementById('form-hari').classList.toggle('hidden', aktif !== 'hari');
-            
-            document.getElementById('tab-zodiak').className = aktif === 'zodiak' 
-                ? 'px-6 py-3 rounded-full font-medium glass glow text-white' 
-                : 'px-6 py-3 rounded-full font-medium text-white/70 hover:text-white glass/50';
-            document.getElementById('tab-hari').className = aktif === 'hari' 
-                ? 'px-6 py-3 rounded-full font-medium glass glow text-white' 
-                : 'px-6 py-3 rounded-full font-medium text-white/70 hover:text-white glass/50';
-        }
-
-        // Fungsi hitung kecocokan yang sudah pasti berjalan
-        function hitungKecocokan(){
+        // FUNGSI UTAMA CEK KECOCOKAN
+        document.getElementById('btnCek').addEventListener('click', function(){
             const z1 = document.getElementById('z1').value;
             const z2 = document.getElementById('z2').value;
-            
+
             if(!z1 || !z2) {
-                alert('⚠️ Silakan pilih Zodiak Kamu dan Zodiak Pasangan terlebih dahulu!');
+                alert('⚠️ Silakan pilih kedua zodiak dulu!');
                 return;
             }
 
-            const e1 = dataZodiak[z1].elemen;
-            const e2 = dataZodiak[z2].elemen;
+            const e1 = data[z1];
+            const e2 = data[z2];
+            let nilai = 50;
 
-            // Dasar kesesuaian elemen
-            let dasar = 50;
-            if(e1 === e2) dasar = 85;
-            else if((e1 === 'Api' && e2 === 'Udara') || (e1 === 'Udara' && e2 === 'Api')) dasar = 82;
-            else if((e1 === 'Tanah' && e2 === 'Air') || (e1 === 'Air' && e2 === 'Tanah')) dasar = 88;
-            else if((e1 === 'Api' && e2 === 'Tanah') || (e1 === 'Tanah' && e2 === 'Api')) dasar = 65;
-            else if((e1 === 'Air' && e2 === 'Udara') || (e1 === 'Udara' && e2 === 'Air')) dasar = 62;
+            if(e1 === e2) nilai = 85;
+            else if((e1==='Api'&&e2==='Udara') || (e1==='Udara'&&e2==='Api')) nilai = 82;
+            else if((e1==='Tanah'&&e2==='Air') || (e1==='Air'&&e2==='Tanah')) nilai = 88;
+            else if((e1==='Api'&&e2==='Tanah') || (e1==='Tanah'&&e2==='Api')) nilai = 65;
+            else nilai = 62;
 
-            // Hitung variasi berdasarkan posisi zodiak
             const urutan = ['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagitarius','capricorn','aquarius','pisces'];
             let jarak = Math.abs(urutan.indexOf(z1) - urutan.indexOf(z2));
-            if(jarak > 6) jarak = 12 - jarak;
-            dasar += (6 - jarak) * 2;
+            jarak = jarak > 6 ? 12 - jarak : jarak;
+            nilai += (6 - jarak) * 2;
+            nilai = Math.min(100, Math.round(nilai));
 
-            // Pembagian aspek
-            const emosi = Math.round(dasar * (e1 === e2 || (e1==='Air'&&e2==='Tanah') || (e1==='Tanah'&&e2==='Air') ? 1.05 : 0.9));
-            const komunikasi = Math.round(dasar * ((e1==='Api'||e1==='Udara') && (e2==='Api'||e2==='Udara') ? 1.1 : 0.95));
-            const gairah = Math.round(dasar * ((e1==='Api'||e1==='Air') && (e2==='Api'||e2==='Air') ? 1.05 : 0.9));
-            const stabil = Math.round(dasar * ((e1==='Tanah'||e1==='Air') && (e2==='Tanah'||e2==='Air') ? 1.1 : 0.9));
-
-            // Batasi nilai maksimal 100
-            const batas = n => Math.min(100, Math.max(40, n));
-            const emosiAkhir = batas(emosi);
-            const komunikasiAkhir = batas(komunikasi);
-            const gairahAkhir = batas(gairah);
-            const stabilAkhir = batas(stabil);
-            const nilaiAkhir = Math.round((emosiAkhir + komunikasiAkhir + gairahAkhir + stabilAkhir) / 4);
-
-            // Status
             let status, uraian;
-            if(nilaiAkhir >= 85) {
-                status = '✨ Pasangan yang Sangat Serasi!';
-                uraian = 'Kalian memiliki keselarasan energi yang luar biasa. Saling mengerti tanpa banyak bicara, mampu saling melengkapi kekurangan dengan penuh kasih sayang. Hubungan berpotensi bertahan lama.';
-            } else if(nilaiAkhir >= 70) {
-                status = 'Pasangan yang Cocok & Harmonis';
-                uraian = 'Kalian memiliki banyak kesamaan nilai dan pandangan. Perbedaan yang ada justru menjadi pelengkap yang indah selama mau saling mendengarkan dan berkomunikasi dengan baik.';
-            } else if(nilaiAkhir >= 55) {
-                status = 'Hubungan yang Membutuhkan Pengertian Lebih';
-                uraian = 'Kalian memiliki perbedaan sifat dan cara pandang yang cukup besar. Namun, dengan kesabaran dan usaha saling memahami, hubungan bisa tumbuh menjadi ikatan yang kuat dan berharga.';
+            if(nilai >= 85) { status = '✨ Sangat Serasi'; uraian = 'Kalian memiliki keselarasan energi yang luar biasa!'; }
+            else if(nilai >= 70) { status = '👍 Cukup Harmonis'; uraian = 'Banyak kesamaan, hanya butuh sedikit saling memahami.'; }
+            else if(nilai >= 55) { status = '🤝 Butuh Pengertian'; uraian = 'Perbedaan ada, namun bisa dipererat dengan kesabaran.'; }
+            else { status = '💪 Penuh Tantangan'; uraian = 'Beda pandangan, bisa jadi pelajaran berharga jika saling menghargai.'; }
+
+            document.getElementById('nilai').textContent = nilai;
+            document.getElementById('status').textContent = status;
+            document.getElementById('uraian').textContent = uraian;
+            document.getElementById('hasil').classList.remove('hidden');
+        });
+
+        // FUNGSI HARI BAIK
+        document.getElementById('btnHari').addEventListener('click', function(){
+            const tgl = document.getElementById('tglLahir').value;
+            const jenis = document.getElementById('jenis').value;
+            const bln = document.getElementById('bulanRencana').value;
+
+            if(!tgl || !jenis || !bln) {
+                alert('Lengkapi semua data dulu!');
+                return;
+            }
+
+            const hariLahir = new Date(tgl).getDate();
+            const [thn, bulan] = bln.split('-');
+            const jmlHari = new Date(thn, bulan, 0).getDate();
+            const namaHari = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+            const namaBulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+            
+            const aturan = {
+                usaha: {boleh: [1,2,3,5], larang: []},
+                kerja: {boleh: [1,2,3,4,5], larang: []},
+                perjalanan: {boleh: [1,2,3,4,5], larang: [0,6]},
+                bangun: {boleh: [1,2,3,4], larang: [0]},
+                nikah: {boleh: [1,2,3,4,5], larang: [5,0]}
+            };
+
+            const syarat = aturan[jenis];
+            const hasil = [];
+
+            for(let h=1; h<=jmlHari; h++){
+                const t = new Date(thn, bulan-1, h);
+                const hariKe = t.getDay();
+                if((h === hariLahir || h % hariLahir === 0 || syarat.boleh.includes(hariKe)) && !syarat.larang.includes(hariKe)){
+                    hasil.push(`✅ ${namaHari[hariKe]}, ${h} ${namaBulan[bulan-1]} ${thn}`);
+                    if(hasil.length >= 5) break;
+                }
+            }
+
+            const ul = document.getElementById('daftarHari');
+            ul.innerHTML = '';
+            if(hasil.length){
+                hasil.forEach(item => {
+                    const li = document.createElement('li');
+                    li.className = 'p-3 bg-white/5 rounded-lg';
+                    li.textContent = item;
+                    ul.appendChild(li);
+                });
             } else {
-                status = 'Hubungan Penuh Tantangan namun Berharga';
-                uraian = 'Perbedaan yang cukup tajam membuat kalian sering memandang hal dari sudut pandang yang berbeda. Tantangan ini justru menjadi sarana belajar tumbuh bersama jika dibangun dengan rasa saling mengharga
+                ul.innerHTML = '<li class="p-4 text-center text-white/60">Tidak ditemukan, coba bulan lain.</li>';
+            }
+            document.getElementById('hasilHari').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
