@@ -262,7 +262,7 @@
             pisces: {elemen: 'Air', sifat: 'Empati, Kreatif'}
         };
 
-        // Tampilkan elemen saat memilih zodiak
+        // Tampilkan elemen otomatis saat memilih zodiak (sudah diperbaiki)
         document.getElementById('z1').addEventListener('change', function(){
             const val = this.value;
             document.getElementById('elemen1').innerHTML = val ? `<option>${dataZodiak[val].elemen}</option>` : `<option>Elemen</option>`;
@@ -292,12 +292,15 @@
                 : 'px-6 py-3 rounded-full font-medium text-white/70 hover:text-white glass/50';
         }
 
-        // Hitung kecocokan zodiak berdasarkan elemen & hubungan
+        // Hitung kecocokan zodiak (sudah diperbaiki agar berjalan lancar)
         function hitungKecocokan(){
             const z1 = document.getElementById('z1').value;
             const z2 = document.getElementById('z2').value;
             
-            if(!z1 || !z2) return alert('Silakan pilih kedua zodiak terlebih dahulu');
+            if(!z1 || !z2) {
+                alert('Silakan pilih kedua zodiak terlebih dahulu ya');
+                return;
+            }
 
             const e1 = dataZodiak[z1].elemen;
             const e2 = dataZodiak[z2].elemen;
@@ -356,5 +359,4 @@
             document.getElementById('komunikasi-bar').style.width = komunikasiAkhir + '%';
             document.getElementById('gairah-nilai').textContent = gairahAkhir + '%';
             document.getElementById('gairah-bar').style.width = gairahAkhir + '%';
-            document.getElementById('stabil-nilai').textContent = stabilAkhir + '%';
-            document.getElementById('stab
+            document.getElementById(
