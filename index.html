@@ -101,9 +101,10 @@
                             <option value="aquarius">Aquarius</option>
                             <option value="pisces">Pisces</option>
                         </select>
-                        <select id="elemen1" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 outline-none opacity-60" disabled>
-                            <option>Elemen</option>
-                        </select>
+                        <!-- Ganti kotak pilihan elemen dengan teks biasa agar terlihat jelas -->
+                        <div id="tampil-elemen1" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 flex items-center text-white/60">
+                            Elemen
+                        </div>
                     </div>
                 </div>
 
@@ -125,14 +126,14 @@
                             <option value="aquarius">Aquarius</option>
                             <option value="pisces">Pisces</option>
                         </select>
-                        <select id="elemen2" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 outline-none opacity-60" disabled>
-                            <option>Elemen</option>
-                        </select>
+                        <div id="tampil-elemen2" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 flex items-center text-white/60">
+                            Elemen
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <button onclick="hitungKecocokan()" class="w-full py-4 rounded-xl bg-gradient-to-r from-cosmic-light to-cosmic-rose font-semibold text-lg shadow-lg hover:opacity-90 transition">
+            <button id="btn-hitung" onclick="hitungKecocokan()" class="w-full py-4 rounded-xl bg-gradient-to-r from-cosmic-light to-cosmic-rose font-semibold text-lg shadow-lg hover:opacity-90 transition">
                 Lihat Keselarasan <i class="fa fa-magic ml-2"></i>
             </button>
 
@@ -262,14 +263,33 @@
             pisces: {elemen: 'Air', sifat: 'Empati, Kreatif'}
         };
 
-        // Tampilkan elemen otomatis saat memilih zodiak (sudah diperbaiki)
+        // Tampilkan elemen otomatis dengan teks (bukan kotak pilihan)
         document.getElementById('z1').addEventListener('change', function(){
             const val = this.value;
-            document.getElementById('elemen1').innerHTML = val ? `<option>${dataZodiak[val].elemen}</option>` : `<option>Elemen</option>`;
+            const kotak = document.getElementById('tampil-elemen1');
+            if(val) {
+                kotak.textContent = dataZodiak[val].elemen;
+                kotak.classList.remove('text-white/60');
+                kotak.classList.add('text-white', 'font-medium');
+            } else {
+                kotak.textContent = 'Elemen';
+                kotak.classList.add('text-white/60');
+                kotak.classList.remove('text-white', 'font-medium');
+            }
         });
+
         document.getElementById('z2').addEventListener('change', function(){
             const val = this.value;
-            document.getElementById('elemen2').innerHTML = val ? `<option>${dataZodiak[val].elemen}</option>` : `<option>Elemen</option>`;
+            const kotak = document.getElementById('tampil-elemen2');
+            if(val) {
+                kotak.textContent = dataZodiak[val].elemen;
+                kotak.classList.remove('text-white/60');
+                kotak.classList.add('text-white', 'font-medium');
+            } else {
+                kotak.textContent = 'Elemen';
+                kotak.classList.add('text-white/60');
+                kotak.classList.remove('text-white', 'font-medium');
+            }
         });
 
         // Ganti tab
@@ -292,13 +312,13 @@
                 : 'px-6 py-3 rounded-full font-medium text-white/70 hover:text-white glass/50';
         }
 
-        // Hitung kecocokan zodiak (sudah diperbaiki agar berjalan lancar)
+        // Fungsi hitung kecocokan yang sudah pasti berjalan
         function hitungKecocokan(){
             const z1 = document.getElementById('z1').value;
             const z2 = document.getElementById('z2').value;
             
             if(!z1 || !z2) {
-                alert('Silakan pilih kedua zodiak terlebih dahulu ya');
+                alert('⚠️ Silakan pilih Zodiak Kamu dan Zodiak Pasangan terlebih dahulu!');
                 return;
             }
 
@@ -346,17 +366,4 @@
                 uraian = 'Kalian memiliki perbedaan sifat dan cara pandang yang cukup besar. Namun, dengan kesabaran dan usaha saling memahami, hubungan bisa tumbuh menjadi ikatan yang kuat dan berharga.';
             } else {
                 status = 'Hubungan Penuh Tantangan namun Berharga';
-                uraian = 'Perbedaan yang cukup tajam membuat kalian sering memandang hal dari sudut pandang yang berbeda. Tantangan ini justru menjadi sarana belajar tumbuh bersama jika dibangun dengan rasa saling menghargai.';
-            }
-
-            // Tampilkan hasil
-            document.getElementById('nilai-akhir').textContent = nilaiAkhir;
-            document.getElementById('status-hubungan').textContent = status;
-
-            document.getElementById('emosi-nilai').textContent = emosiAkhir + '%';
-            document.getElementById('emosi-bar').style.width = emosiAkhir + '%';
-            document.getElementById('komunikasi-nilai').textContent = komunikasiAkhir + '%';
-            document.getElementById('komunikasi-bar').style.width = komunikasiAkhir + '%';
-            document.getElementById('gairah-nilai').textContent = gairahAkhir + '%';
-            document.getElementById('gairah-bar').style.width = gairahAkhir + '%';
-            document.getElementById(
+                uraian = 'Perbedaan yang cukup tajam membuat kalian sering memandang hal dari sudut pandang yang berbeda. Tantangan ini justru menjadi sarana belajar tumbuh bersama jika dibangun dengan rasa saling mengharga
