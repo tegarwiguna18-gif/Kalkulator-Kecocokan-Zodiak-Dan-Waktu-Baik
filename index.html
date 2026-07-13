@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Bintang & Waktu Terbaik | Ragam FM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cosmic: {
+                            dark: '#0F0C29',
+                            mid: '#302B63',
+                            light: '#6366F1',
+                            accent: '#FCD34D',
+                            rose: '#F472B6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Segoe UI', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .bg-cosmic {
+                background: linear-gradient(180deg, #0F0C29 0%, #302B63 50%, #24243e 100%);
+            }
+            .glass {
+                background: rgba(255, 255, 255, 0.08);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+            }
+            .glow {
+                box-shadow: 0 0 25px rgba(99, 102, 241, 0.35);
+            }
+            .star {
+                position: absolute;
+                background: white;
+                border-radius: 50%;
+                animation: twinkle 3s infinite alternate;
+            }
+            @keyframes twinkle {
+                0% { opacity: 0.3; transform: scale(0.8); }
+                100% { opacity: 1; transform: scale(1.2); }
+            }
+        }
+    </style>
+</head>
+<body class="bg-cosmic min-h-screen text-white relative overflow-x-hidden">
+    <!-- Bintang Latar -->
+    <div id="stars-container" class="absolute inset-0 pointer-events-none"></div>
+
+    <!-- Header -->
+    <header class="relative z-10 py-8 px-4 text-center">
+        <h1 class="text-[clamp(1.8rem,5vw,2.8rem)] font-bold bg-gradient-to-r from-cosmic-accent via-white to-cosmic-rose bg-clip-text text-transparent">
+            🔮 Ragam Bintang & Waktu
+        </h1>
+        <p class="text-white/70 mt-2 max-w-lg mx-auto">Menemukan keselarasan bintang dan waktu terbaik untuk langkahmu</p>
+    </header>
+
+    <!-- Navigasi -->
+    <div class="relative z-10 flex justify-center gap-3 px-4 mb-8 flex-wrap">
+        <button id="tab-zodiak" class="px-6 py-3 rounded-full font-medium glass glow text-white">
+            ♈ Kecocokan Zodiak
+        </button>
+        <button id="tab-hari" class="px-6 py-3 rounded-full font-medium text-white/70 hover:text-white glass/50">
+            📅 Hari Baik
+        </button>
+    </div>
+
+    <!-- Konten Utama -->
+    <main class="relative z-10 container mx-auto px-4 pb-16">
+        <!-- Kalkulator Kecocokan Zodiak -->
+        <section id="form-zodiak" class="glass rounded-3xl p-6 md:p-10 max-w-xl mx-auto glow">
+            <h2 class="text-2xl font-bold text-center mb-6">Analisis Kecocokan Pasangan</h2>
+            
+            <div class="space-y-5 mb-8">
+                <div>
+                    <label class="block text-white/80 mb-2 font-medium">Data Diri Anda</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <select id="z1" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 outline-none focus:ring-2 focus:ring-cosmic-light">
+                            <option value="">Pilih Zodiak</option>
+                            <option value="aries">Aries</option>
+                            <option value="taurus">Taurus</option>
+                            <option value="gemini">Gemini</option>
+                            <option value="cancer">Cancer</option>
+                            <option value="leo">Leo</option>
+                            <option value="virgo">Virgo</option>
+                            <option value="libra">Libra</option>
+                            <option value="scorpio">Scorpio</option>
+                            <option value="sagitarius">Sagitarius</option>
+                            <option value="capricorn">Capricorn</option>
+                            <option value="aquarius">Aquarius</option>
+                            <option value="pisces">Pisces</option>
+                        </select>
+                        <select id="elemen1" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 outline-none opacity-60" disabled>
+                            <option>Elemen</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-white/80 mb-2 font-medium">Data Pasangan</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <select id="z2" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 outline-none focus:ring-2 focus:ring-cosmic-light">
+                            <option value="">Pilih Zodiak</option>
+                            <option value="aries">Aries</option>
+                            <option value="taurus">Taurus</option>
+                            <option value="gemini">Gemini</option>
+                            <option value="cancer">Cancer</option>
+                            <option value="leo">Leo</option>
+                            <option value="virgo">Virgo</option>
+                            <option value="libra">Libra</option>
+                            <option value="scorpio">Scorpio</option>
+                            <option value="sagitarius">Sagitarius</option>
+                            <option value="capricorn">Capricorn</option>
+                            <option value="aquarius">Aquarius</option>
+                            <option value="pisces">Pisces</option>
+                        </select>
+                        <select id="elemen2" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 outline-none opacity-60" disabled>
+                            <option>Elemen</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="hitungKecocokan()" class="w-full py-4 rounded-xl bg-gradient-to-r from-cosmic-light to-cosmic-rose font-semibold text-lg shadow-lg hover:opacity-90 transition">
+                Lihat Keselarasan <i class="fa fa-magic ml-2"></i>
+            </button>
+
+            <!-- Hasil -->
+            <div id="hasil-zodiak" class="mt-8 hidden">
+                <div class="p-6 rounded-2xl bg-white/5 border border-white/15">
+                    <div class="text-center mb-4">
+                        <div class="text-5xl font-bold text-cosmic-accent mb-2"><span id="nilai-akhir">0</span>%</div>
+                        <h3 id="status-hubungan" class="text-xl font-semibold"></h3>
+                    </div>
+
+                    <div class="space-y-4 mt-6">
+                        <div class="p-3 bg-white/5 rounded-lg">
+                            <p class="text-sm text-white/60">Keserasian Emosi</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium" id="emosi-nilai"></span>
+                                <div class="w-2/3 bg-white/10 rounded-full h-2"><div id="emosi-bar" class="h-full rounded-full bg-pink-400"></div></div>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-white/5 rounded-lg">
+                            <p class="text-sm text-white/60">Komunikasi & Pikiran</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium" id="komunikasi-nilai"></span>
+                                <div class="w-2/3 bg-white/10 rounded-full h-2"><div id="komunikasi-bar" class="h-full rounded-full bg-blue-400"></div></div>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-white/5 rounded-lg">
+                            <p class="text-sm text-white/60">Keintiman & Gairah</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium" id="gairah-nilai"></span>
+                                <div class="w-2/3 bg-white/10 rounded-full h-2"><div id="gairah-bar" class="h-full rounded-full bg-red-400"></div></div>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-white/5 rounded-lg">
+                            <p class="text-sm text-white/60">Kestabilan Jangka Panjang</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium" id="stabil-nilai"></span>
+                                <div class="w-2/3 bg-white/10 rounded-full h-2"><div id="stabil-bar" class="h-full rounded-full bg-amber-400"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 pt-4 border-t border-white/10">
+                        <p class="text-white/80" id="uraian-lengkap"></p>
+                        <p class="text-sm text-white/50 mt-3 italic">*Bersifat sebagai panduan penambah keyakinan diri</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kalkulator Hari Baik -->
+        <section id="form-hari" class="glass rounded-3xl p-6 md:p-10 max-w-xl mx-auto glow hidden">
+            <h2 class="text-2xl font-bold text-center mb-6">Pencarian Waktu Terbaik</h2>
+            
+            <div class="space-y-5 mb-8">
+                <div>
+                    <label class="block text-white/80 mb-2 font-medium">Tanggal Lahir Anda</label>
+                    <input type="date" id="tgl-lahir" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 outline-none focus:ring-2 focus:ring-cosmic-light">
+                </div>
+
+                <div>
+                    <label class="block text-white/80 mb-2 font-medium">Jenis Kegiatan</label>
+                    <select id="jenis" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 outline-none focus:ring-2 focus:ring-cosmic-light">
+                        <option value="">-- Pilih Kegiatan --</option>
+                        <option value="usaha">Memulai Usaha / Bisnis</option>
+                        <option value="kerja">Mulai Pekerjaan / Kontrak Baru</option>
+                        <option value="perjalanan">Perjalanan Jauh</option>
+                        <option value="bangun">Membangun / Merenovasi Rumah</option>
+                        <option value="nikah">Menikah / Bertunangan</option>
+                        <option value="belanja">Membeli Barang Berharga</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-white/80 mb-2 font-medium">Bulan & Tahun Perencanaan</label>
+                    <input type="month" id="bulan-rencana" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 outline-none focus:ring-2 focus:ring-cosmic-light">
+                </div>
+            </div>
+
+            <button onclick="cariHariBaik()" class="w-full py-4 rounded-xl bg-gradient-to-r from-cosmic-light to-cosmic-accent font-semibold text-lg shadow-lg hover:opacity-90 transition">
+                Temukan Hari Baik <i class="fa fa-calendar-check-o ml-2"></i>
+            </button>
+
+            <!-- Hasil -->
+            <div id="hasil-hari" class="mt-8 hidden">
+                <div class="p-6 rounded-2xl bg-white/5 border border-white/15">
+                    <h3 class="text-xl font-semibold mb-4 text-center">✨ Waktu yang Disarankan</h3>
+                    <ul id="daftar-hari" class="space-y-3">
+                    </ul>
+                    <p class="text-sm text-white/50 mt-5 italic">*Menggabungkan prinsip astrologi dan kearifan lokal. Sebagai panduan tambahan keyakinan.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 text-center py-6 text-white/50 text-sm border-t border-white/10">
+        <p>© 2026 Ragam FM Studio & News | Dibuat dengan sepenuh hati ✨</p>
+    </footer>
+
+    <script>
+        // Buat latar bintang berkelap-kelip
+        const container = document.getElementById('stars-container');
+        for(let i=0; i<120; i++){
+            const bintang = document.createElement('div');
+            bintang.classList.add('star');
+            bintang.style.left = `${Math.random()*100}%`;
+            bintang.style.top = `${Math.random()*100}%`;
+            bintang.style.width = bintang.style.height = `${Math.random()*2.5+1}px`;
+            bintang.style.animationDelay = `${Math.random()*3}s`;
+            container.appendChild(bintang);
+        }
+
+        // Data zodiak: elemen & sifat dasar
+        const dataZodiak = {
+            aries: {elemen: 'Api', sifat: 'Pemberani, Dinamis'},
+            taurus: {elemen: 'Tanah', sifat: 'Setia, Teguh'},
+            gemini: {elemen: 'Udara', sifat: 'Cerdas, Komunikatif'},
+            cancer: {elemen: 'Air', sifat: 'Penyayang, Peka'},
+            leo: {elemen: 'Api', sifat: 'Berjiwa besar, Percaya diri'},
+            virgo: {elemen: 'Tanah', sifat: 'Teliti, Suka menolong'},
+            libra: {elemen: 'Udara', sifat: 'Harmonis, Bijaksana'},
+            scorpio: {elemen: 'Air', sifat: 'Penuh gairah, Setia'},
+            sagitarius: {elemen: 'Api', sifat: 'Bebas, Optimis'},
+            capricorn: {elemen: 'Tanah', sifat: 'Tekun, Bertanggung jawab'},
+            aquarius: {elemen: 'Udara', sifat: 'Unik, Berpikiran maju'},
+            pisces: {elemen: 'Air', sifat: 'Empati, Kreatif'}
+        };
+
+        // Tampilkan elemen saat memilih zodiak
+        document.getElementById('z1').addEventListener('change', function(){
+            const val = this.value;
+            document.getElementById('elemen1').innerHTML = val ? `<option>${dataZodiak[val].elemen}</option>` : `<option>Elemen</option>`;
+        });
+        document.getElementById('z2').addEventListener('change', function(){
+            const val = this.value;
+            document.getElementById('elemen2').innerHTML = val ? `<option>${dataZodiak[val].elemen}</option>` : `<option>Elemen</option>`;
+        });
+
+        // Ganti tab
+        document.getElementById('tab-zodiak').addEventListener('click', () => {
+            gantiMenu('zodiak');
+        });
+        document.getElementById('tab-hari').addEventListener('click', () => {
+            gantiMenu('hari');
+        });
+
+        function gantiMenu(aktif){
+            document.getElementById('form-zodiak').classList.toggle('hidden', aktif !== 'zodiak');
+            document.getElementById('form-hari').classList.toggle('hidden', aktif !== 'hari');
+            
+            document.getElementById('tab-zodiak').className = aktif === 'zodiak' 
+                ? 'px-6 py-3 rounded-full font-medium glass glow text-white' 
+                : 'px-6 py-3 rounded-full font-medium text-white/70 hover:text-white glass/50';
+            document.getElementById('tab-hari').className = aktif === 'hari' 
+                ? 'px-6 py-3 rounded-full font-medium glass glow text-white' 
+                : 'px-6 py-3 rounded-full font-medium text-white/70 hover:text-white glass/50';
+        }
+
+        // Hitung kecocokan zodiak berdasarkan elemen & hubungan
+        function hitungKecocokan(){
+            const z1 = document.getElementById('z1').value;
+            const z2 = document.getElementById('z2').value;
+            
+            if(!z1 || !z2) return alert('Silakan pilih kedua zodiak terlebih dahulu');
+
+            const e1 = dataZodiak[z1].elemen;
+            const e2 = dataZodiak[z2].elemen;
+
+            // Dasar kesesuaian elemen
+            let dasar = 50;
+            if(e1 === e2) dasar = 85;
+            else if((e1 === 'Api' && e2 === 'Udara') || (e1 === 'Udara' && e2 === 'Api')) dasar = 82;
+            else if((e1 === 'Tanah' && e2 === 'Air') || (e1 === 'Air' && e2 === 'Tanah')) dasar = 88;
+            else if((e1 === 'Api' && e2 === 'Tanah') || (e1 === 'Tanah' && e2 === 'Api')) dasar = 65;
+            else if((e1 === 'Air' && e2 === 'Udara') || (e1 === 'Udara' && e2 === 'Air')) dasar = 62;
+
+            // Hitung variasi berdasarkan posisi zodiak
+            const urutan = ['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagitarius','capricorn','aquarius','pisces'];
+            let jarak = Math.abs(urutan.indexOf(z1) - urutan.indexOf(z2));
+            if(jarak > 6) jarak = 12 - jarak;
+            dasar += (6 - jarak) * 2;
+
+            // Pembagian aspek
+            const emosi = Math.round(dasar * (e1 === e2 || (e1==='Air'&&e2==='Tanah') || (e1==='Tanah'&&e2==='Air') ? 1.05 : 0.9));
+            const komunikasi = Math.round(dasar * ((e1==='Api'||e1==='Udara') && (e2==='Api'||e2==='Udara') ? 1.1 : 0.95));
+            const gairah = Math.round(dasar * ((e1==='Api'||e1==='Air') && (e2==='Api'||e2==='Air') ? 1.05 : 0.9));
+            const stabil = Math.round(dasar * ((e1==='Tanah'||e1==='Air') && (e2==='Tanah'||e2==='Air') ? 1.1 : 0.9));
+
+            // Batasi nilai maksimal 100
+            const batas = n => Math.min(100, Math.max(40, n));
+            const emosiAkhir = batas(emosi);
+            const komunikasiAkhir = batas(komunikasi);
+            const gairahAkhir = batas(gairah);
+            const stabilAkhir = batas(stabil);
+            const nilaiAkhir = Math.round((emosiAkhir + komunikasiAkhir + gairahAkhir + stabilAkhir) / 4);
+
+            // Status
+            let status, uraian;
+            if(nilaiAkhir >= 85) {
+                status = '✨ Pasangan yang Sangat Serasi!';
+                uraian = 'Kalian memiliki keselarasan energi yang luar biasa. Saling mengerti tanpa banyak bicara, mampu saling melengkapi kekurangan dengan penuh kasih sayang. Hubungan berpotensi bertahan lama.';
+            } else if(nilaiAkhir >= 70) {
+                status = 'Pasangan yang Cocok & Harmonis';
+                uraian = 'Kalian memiliki banyak kesamaan nilai dan pandangan. Perbedaan yang ada justru menjadi pelengkap yang indah selama mau saling mendengarkan dan berkomunikasi dengan baik.';
+            } else if(nilaiAkhir >= 55) {
+                status = 'Hubungan yang Membutuhkan Pengertian Lebih';
+                uraian = 'Kalian memiliki perbedaan sifat dan cara pandang yang cukup besar. Namun, dengan kesabaran dan usaha saling memahami, hubungan bisa tumbuh menjadi ikatan yang kuat dan berharga.';
+            } else {
+                status = 'Hubungan Penuh Tantangan namun Berharga';
+                uraian = 'Perbedaan yang cukup tajam membuat kalian sering memandang hal dari sudut pandang yang berbeda. Tantangan ini justru menjadi sarana belajar tumbuh bersama jika dibangun dengan rasa saling menghargai.';
+            }
+
+            // Tampilkan hasil
+            document.getElementById('nilai-akhir').textContent = nilaiAkhir;
+            document.getElementById('status-hubungan').textContent = status;
+
+            document.getElementById('emosi-nilai').textContent = emosiAkhir + '%';
+            document.getElementById('emosi-bar').style.width = emosiAkhir + '%';
+            document.getElementById('komunikasi-nilai').textContent = komunikasiAkhir + '%';
+            document.getElementById('komunikasi-bar').style.width = komunikasiAkhir + '%';
+            document.getElementById('gairah-nilai').textContent = gairahAkhir + '%';
+            document.getElementById('gairah-bar').style.width = gairahAkhir + '%';
+            document.getElementById('stabil-nilai').textContent = stabilAkhir + '%';
+            document.getElementById('stab
